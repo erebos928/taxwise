@@ -1,9 +1,9 @@
 package com.taxwise.model;
 
 public class TaxBracket {
-    private double minIncome;
-    private double maxIncome;
-    private double taxRate;
+    private final double minIncome;
+    private final double maxIncome;
+    private final double taxRate;
 
     public TaxBracket(double minIncome, double maxIncome, double taxRate) {
         this.minIncome = minIncome;
