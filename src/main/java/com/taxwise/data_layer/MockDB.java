@@ -1,7 +1,6 @@
 package com.taxwise.data_layer;
 
 import com.taxwise.model.TaxBracket;
-import java.util.HashMap;
 import java.util.List;
 
 public class MockDB {
@@ -28,14 +27,14 @@ public class MockDB {
                 new TaxBracket(129590, Double.MAX_VALUE, 0.2575)
         );
         double quebecseuil = 17000.0;
-    }
+
     // Retourne les tranches d’une autorité
     public static List<TaxBracket> getBrackets(String authority) {
         if (authority.equals("Canada")) return canadaBrackets;
         else if (authority.equals("Quebec")) return quebecBrackets;
         else return List.of(); // vide par défaut
     }
-    }
+
     // Retourne le seuil de base d’une autorité
     public static double getseuil(String authority) {
         if (authority.equals("Canada")) return canadaseuil;
@@ -49,4 +48,4 @@ public class MockDB {
 
 
 
-}
+
