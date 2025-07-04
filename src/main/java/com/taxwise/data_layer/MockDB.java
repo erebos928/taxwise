@@ -8,7 +8,8 @@ public class MockDB {
         //TaxBracket(double minIncome, double maxIncome, double taxRate)
         //Taux d'imposition Canada par tranches pour 2025 voir Package DiagrammeInformation
         // Le seuil de revenu de base non imposable pour Canada 15 705 $ (Université de Sherbrooke) et Quebec 17000 (Estimation sur google)
-
+        static final double canadaseuil = 15000.0;
+        static final double quebecseuil = 17000.0;
         private static final List<TaxBracket> canadaBrackets = List.of(
                 new TaxBracket(0, 57375, 0.15),
                 new TaxBracket(57375, 114750, 0.205),
@@ -16,7 +17,7 @@ public class MockDB {
                 new TaxBracket(177882, 253414 , 0.29),
                 new TaxBracket(253414, Double.MAX_VALUE, 0.33)
         );
-        double canadaseuil = 15000.0;
+
 
         // Définition des tranches pour le Québec voir Package DiagrammeInformation
         ////Taux d'imposition Canada par tranches pour 2025
@@ -26,7 +27,7 @@ public class MockDB {
                 new TaxBracket(106495, 129590, 0.24),
                 new TaxBracket(129590, Double.MAX_VALUE, 0.2575)
         );
-        double quebecseuil = 17000.0;
+
 
     // Retourne les tranches d’une autorité
     public static List<TaxBracket> getBrackets(String authority) {
