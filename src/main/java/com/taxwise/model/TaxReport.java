@@ -2,6 +2,7 @@ package com.taxwise.model;
 //Représente une déclaration d'impôt produite pour un contribuable.
 
 public class TaxReport {
+    private int id;
     private int year;     // Année fiscale
     private double income; // Revenu déclaré
     private double tax;   // Montant d'impôt calculé

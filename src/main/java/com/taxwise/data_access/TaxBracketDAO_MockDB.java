@@ -18,7 +18,7 @@ public class TaxBracketDAO_MockDB implements ITaxBracketDAO {
     // Récupère le seuil non imposable pour l'autorité choisie
     @Override
     public double getTaxFreeThreshold(String authority) {
-        return MockDB.getseuil(authority);
+        return MockDB.getThreshold(authority);
     }
 }
 

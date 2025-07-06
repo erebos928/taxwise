@@ -1,6 +1,7 @@
 package com.taxwise.view;
 
 import com.taxwise.control.TaxCalculator;
+import com.taxwise.data_access.TaxBracketDAO_JDBC;
 import com.taxwise.data_access.TaxBracketDAO_MockDB;
 import com.taxwise.model.TaxReport;
 import java.util.Scanner;
@@ -26,7 +27,7 @@ public class TaxwiseUI {
         String authority = scanner.nextLine();
 
         // Traitement et résultat
-        TaxCalculator calculator = new TaxCalculator(new TaxBracketDAO_MockDB());
+        TaxCalculator calculator = new TaxCalculator(new TaxBracketDAO_JDBC());
         TaxReport report = calculator.fileReport(sin, income, year, authority);
 
         // Affichage du rapport

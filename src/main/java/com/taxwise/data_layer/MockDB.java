@@ -1,46 +1,59 @@
 package com.taxwise.data_layer;
 
+import com.taxwise.model.TaxAuthority;
 import com.taxwise.model.TaxBracket;
+
 import java.util.List;
 
 public class MockDB {
 
-        //TaxBracket(double minIncome, double maxIncome, double taxRate)
-        //Taux d'imposition Canada par tranches pour 2025 voir Package DiagrammeInformation
-        // Le seuil de revenu de base non imposable pour Canada 15 705 $ (Université de Sherbrooke) et Quebec 17000 (Estimation sur google)
-        static final double canadaseuil = 15000.0;
-        static final double quebecseuil = 17000.0;
-        private static final List<TaxBracket> canadaBrackets = List.of(
-                new TaxBracket(0, 57375, 0.15),
-                new TaxBracket(57375, 114750, 0.205),
-                new TaxBracket(114750, 177882, 0.26),
-                new TaxBracket(177882, 253414 , 0.29),
-                new TaxBracket(253414, Double.MAX_VALUE, 0.33)
-        );
+    //TaxBracket(double minIncome, double maxIncome, double taxRate)
+    //Taux d'imposition Canada par tranches pour 2025 voir Package DiagrammeInformation
+    // Le seuil de revenu de base non imposable pour Canada 15 705 $ (Université de Sherbrooke) et Quebec 17000 (Estimation sur google)
+    static final double FEDERAL_THRESHOLD = 15000.0;
+    static final double QUEBEC_THRESHOLD = 17000.0;
+    private static final List<TaxBracket> FEDERAL_BRACKETS = List.of(
+            new TaxBracket(0, 1, 15001, 18000, 10),//
+            new TaxBracket(57375, 1, 18001, 20000, 15),
+            new TaxBracket(114750, 1, 20001, 25000, 16),
+            new TaxBracket(177882, 1, 25001, 27000, 17),
+            new TaxBracket(253414, 1, 27001, Double.MAX_VALUE, 17)
+    );
+    private static final List<TaxBracket> QUEBEC_BRACKETS = List.of(
+            new TaxBracket(0, 2, 15001, 18000, 9.5),
+            new TaxBracket(57, 2, 18001, 20000, 10.2),
+            new TaxBracket(11, 2, 20001, 25000, 11),
+            new TaxBracket(17, 2, 25001, 27000, 11.5),
+            new TaxBracket(25, 2, 27001, Double.MAX_VALUE, 12)
+    );
 
-
-        // Définition des tranches pour le Québec voir Package DiagrammeInformation
-        ////Taux d'imposition Canada par tranches pour 2025
-        private static final List<TaxBracket> quebecBrackets = List.of(
-                new TaxBracket(0, 53255, 0.14),
-                new TaxBracket(53255, 106495, 0.19),
-                new TaxBracket(106495, 129590, 0.24),
-                new TaxBracket(129590, Double.MAX_VALUE, 0.2575)
-        );
+    private static final List<TaxAuthority> authorities = List.of(
+            new TaxAuthority(1, "Federal", FEDERAL_THRESHOLD, FEDERAL_BRACKETS),
+            new TaxAuthority(2, "Quebec", QUEBEC_THRESHOLD, QUEBEC_BRACKETS)
+    );
 
 
     // Retourne les tranches d’une autorité
-    public static List<TaxBracket> getBrackets(String authority) {
-        if (authority.equals("Canada")) return canadaBrackets;
-        else if (authority.equals("Quebec")) return quebecBrackets;
-        else return List.of(); // vide par défaut
+    public static List<TaxBracket> getBrackets(String authorityLabel) {
+        TaxAuthority authority = findAuthority(authorityLabel);
+        if (authority != null)
+            return authority.getTaxBrackets();
+        throw new RuntimeException(String.format("No such authority found: %s", authorityLabel));
+    }
+
+    private static TaxAuthority findAuthority(String label) {
+        for( TaxAuthority authority : authorities)
+            if (label.equals(authority.getLabel()))
+                return authority;
+        return null;
     }
 
     // Retourne le seuil de base d’une autorité
-    public static double getseuil(String authority) {
-        if (authority.equals("Canada")) return canadaseuil;
-        else if (authority.equals("Quebec")) return quebecseuil;
-        else return 0.0;
+    public static double getThreshold(String authorityLabel) {
+        TaxAuthority authority = findAuthority(authorityLabel);
+        if (authority != null)
+            return authority.getTaxFreeThreshold();
+        throw new RuntimeException(String.format("No such authority found: %s", authorityLabel));
     }
 }
 
