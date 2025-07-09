@@ -2,11 +2,9 @@
 -- url: jdbc:mysql://mysql-behrooz.alwaysdata.net:3306/behrooz_taxwise
 DROP TABLE IF EXISTS TaxAuthority;
 DROP TABLE IF EXISTS TaxBracket;
-DROP TABLE IF EXISTS PAYER_AUTHORITY;
-
 DROP TABLE IF EXISTS TaxReport;
-
 DROP TABLE IF EXISTS TaxPayer;
+
 CREATE TABLE TaxAuthority
 (
 id INT PRIMARY KEY AUTO_INCREMENT,
@@ -28,21 +26,14 @@ id INT PRIMARY KEY AUTO_INCREMENT,
 name VARCHAR(125),
 sin INT
 );
-CREATE TABLE PAYER_AUTHORITY
+CREATE TABLE TaxReport
 (
 id INT PRIMARY KEY AUTO_INCREMENT,
 payer_id INT,
 authority_id INT,
-report_id INT,
-FOREIGN KEY (payer_id) REFERENCES TaxPayer(id),
-FOREIGN KEY (authority_id) REFERENCES TaxAuthority(id)
-);
-CREATE TABLE TaxReport
-(
-id INT PRIMARY KEY AUTO_INCREMENT,
-payer_authority_id INT,
 year INT,
 income DOUBLE,
 tax DOUBLE,
-FOREIGN KEY (payer_authority_id) REFERENCES PAYER_AUTHORITY(id)
+FOREIGN KEY (payer_id) REFERENCES TaxPayer(id),
+FOREIGN KEY (authority_id) REFERENCES TaxAuthority(id)
 );

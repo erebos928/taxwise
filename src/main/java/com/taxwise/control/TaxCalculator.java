@@ -68,6 +68,7 @@ public class TaxCalculator {
 // return TaxReport contenant les détails du calcul
 
     public TaxReport fileReport(int sin, double income, int year, String authority) {
+
         double tax = calculateTax(authority, income);
         return new TaxReport(year, income, tax);
     }

@@ -2,7 +2,9 @@ package com.taxwise.data_layer;
 
 import com.taxwise.model.TaxAuthority;
 import com.taxwise.model.TaxBracket;
+import com.taxwise.model.TaxReport;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class MockDB {
@@ -12,6 +14,7 @@ public class MockDB {
     // Le seuil de revenu de base non imposable pour Canada 15 705 $ (Université de Sherbrooke) et Quebec 17000 (Estimation sur google)
     static final double FEDERAL_THRESHOLD = 15000.0;
     static final double QUEBEC_THRESHOLD = 17000.0;
+    private final static List<TaxReport> reports = new ArrayList<>();
     private static final List<TaxBracket> FEDERAL_BRACKETS = List.of(
             new TaxBracket(0, 1, 15001, 18000, 10),//
             new TaxBracket(57375, 1, 18001, 20000, 15),
@@ -55,11 +58,16 @@ public class MockDB {
             return authority.getTaxFreeThreshold();
         throw new RuntimeException(String.format("No such authority found: %s", authorityLabel));
     }
+    public static void addReport(TaxReport report){
+        for (TaxReport item: reports){
+          if (item.getId() == report.getId()){
+              reports.remove(item);
+              break;
+          }
+        }
+        reports.add(report);
+    }
+    public static List<TaxReport> getReports(){
+        return reports;
+    }
 }
-
-
-
-
-
-
-

@@ -3,10 +3,10 @@ package com.taxwise.model;
 import java.util.List;
 
 public class TaxAuthority {
-    private int id;
-    private String label;
-    private double taxFreeThreshold;
-    private List<TaxBracket> taxBrackets;
+    private final int id;
+    private final String label;
+    private final double taxFreeThreshold;
+    private final List<TaxBracket> taxBrackets;
 
     public TaxAuthority(int id, String label, double taxFreeThreshold, List<TaxBracket> taxBrackets) {
         this.id = id;
@@ -27,4 +27,8 @@ public class TaxAuthority {
         return taxBrackets;
     }
     List<TaxBracket> rates;
+
+    public int getId() {
+        return id;
+    }
 }

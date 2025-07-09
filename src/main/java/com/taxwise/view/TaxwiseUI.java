@@ -23,12 +23,13 @@ public class TaxwiseUI {
         int year = scanner.nextInt();
         scanner.nextLine(); // consommer le retour à la ligne
 
-        System.out.print("Entrez l'autorité fiscale (Canada ou Quebec) : ");
-        String authority = scanner.nextLine();
+        System.out.print("Entrez l'autorité fiscale (Federal ou Quebec) : ");
+        String authorityName = scanner.nextLine();
 
         // Traitement et résultat
+
         TaxCalculator calculator = new TaxCalculator(new TaxBracketDAO_JDBC());
-        TaxReport report = calculator.fileReport(sin, income, year, authority);
+        TaxReport report = calculator.fileReport(sin, income, year, authorityName);
 
         // Affichage du rapport
         System.out.println("\nDéclaration d'impôt :");

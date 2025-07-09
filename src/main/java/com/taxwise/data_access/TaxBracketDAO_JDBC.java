@@ -7,21 +7,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class TaxBracketDAO_JDBC implements ITaxBracketDAO{
-    private final String dbUrl = "jdbc:mysql://mysql-behrooz.alwaysdata.net:3306/behrooz_taxwise";
-    private final String user = "behrooz";
-    private final String password = "qualityassurance395";
     private static Connection connection;
-    static{
-        try {
-            Class.forName("com.mysql.cj.jdbc.Driver");
-        } catch (ClassNotFoundException e) {
-            throw new RuntimeException(e);
-        }
-    }
     @Override
     public List<TaxBracket> findAllBrackets(String authority) {
         final String query = "SELECT * FROM TaxBracket B JOIN TaxAuthority A on B.authority_id=A.id WHERE A.label = ?";
-        try(Connection connection = DriverManager.getConnection(dbUrl,user,password)) {
+        try(Connection connection = DriverManager.getConnection(DbSpecs.url,
+                DbSpecs.user,
+                DbSpecs.password))
+            {
             PreparedStatement preparedStatement = connection.prepareStatement(query);
             preparedStatement.setString(1, authority);
             ResultSet resultSet = preparedStatement.executeQuery();
@@ -54,7 +47,10 @@ public class TaxBracketDAO_JDBC implements ITaxBracketDAO{
     @Override
     public double getTaxFreeThreshold(String authority) {
         final String query = "SELECT A.taxFreeThreshold FROM TaxAuthority A WHERE A.label = ?";
-        try(Connection connection = DriverManager.getConnection(dbUrl,user,password)) {
+        try(Connection connection = DriverManager.getConnection(DbSpecs.url,
+                DbSpecs.user,
+                DbSpecs.password))
+        {
             PreparedStatement preparedStatement = connection.prepareStatement(query);
             preparedStatement.setString(1, authority);
             ResultSet resultSet = preparedStatement.executeQuery();
