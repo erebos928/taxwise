@@ -1,9 +1,11 @@
 -- database user: behrooz pass: qualityassurance395
 -- url: jdbc:mysql://mysql-behrooz.alwaysdata.net:3306/behrooz_taxwise
-DROP TABLE IF EXISTS TaxAuthority;
 DROP TABLE IF EXISTS TaxBracket;
 DROP TABLE IF EXISTS TaxReport;
+DROP TABLE IF EXISTS TaxAuthority;
 DROP TABLE IF EXISTS TaxPayer;
+
+
 
 CREATE TABLE TaxAuthority
 (

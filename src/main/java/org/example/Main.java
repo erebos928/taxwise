@@ -4,6 +4,9 @@ import com.taxwise.view.TaxwiseUI;
 
 public class Main {
     public static void main(String[] args) {
-        new TaxwiseUI().run();
+        TaxwiseUI taxwiseUI = new TaxwiseUI();
+        while(true) {
+            taxwiseUI.run();
+        }
     }
 }

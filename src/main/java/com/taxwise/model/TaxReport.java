@@ -23,7 +23,7 @@ public class TaxReport {
     }
 
     public String toString() {
-        return "Année: " + year + ", Revenu: " + income + ", Impôt: " + tax;
+        return "Year: " + year + ", Income: " + income + ", Tax: " + String.format("%.2f",tax);
     }
 
     public double getTax() { return tax; }

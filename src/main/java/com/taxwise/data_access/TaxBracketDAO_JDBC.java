@@ -10,7 +10,7 @@ public class TaxBracketDAO_JDBC implements ITaxBracketDAO{
     private static Connection connection;
     @Override
     public List<TaxBracket> findAllBrackets(String authority) {
-        final String query = "SELECT * FROM TaxBracket B JOIN TaxAuthority A on B.authority_id=A.id WHERE A.label = ?";
+        final String query = getBracketsQuerySqlString();
         try(Connection connection = DriverManager.getConnection(DbSpecs.url,
                 DbSpecs.user,
                 DbSpecs.password))
@@ -25,6 +25,10 @@ public class TaxBracketDAO_JDBC implements ITaxBracketDAO{
         }catch(SQLException e){
             throw new RuntimeException(e);
         }
+    }
+
+    private static String getBracketsQuerySqlString() {
+        return "SELECT * FROM TaxBracket B JOIN TaxAuthority A on B.authority_id=A.id WHERE A.label = ?";
     }
 
     private List<TaxBracket> extractBrackets(ResultSet resultSet) {
@@ -46,7 +50,7 @@ public class TaxBracketDAO_JDBC implements ITaxBracketDAO{
 
     @Override
     public double getTaxFreeThreshold(String authority) {
-        final String query = "SELECT A.taxFreeThreshold FROM TaxAuthority A WHERE A.label = ?";
+        final String query = getQuerySqlString();
         try(Connection connection = DriverManager.getConnection(DbSpecs.url,
                 DbSpecs.user,
                 DbSpecs.password))
@@ -65,5 +69,9 @@ public class TaxBracketDAO_JDBC implements ITaxBracketDAO{
         }catch(SQLException e){
             throw new RuntimeException(e);
         }
+    }
+
+    private static String getQuerySqlString() {
+        return "SELECT A.taxFreeThreshold FROM TaxAuthority A WHERE A.label = ?";
     }
 }
