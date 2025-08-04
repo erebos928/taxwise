@@ -19,6 +19,14 @@ public class TaxPayer {
             return sin;
         }
 
+    @Override
+    public String toString() {
+        return "TaxPayer{" +
+                "name='" + name + '\'' +
+                ", sin=" + sin +
+                '}';
+    }
+
     public int getId() {
             return id;
     }

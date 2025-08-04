@@ -26,9 +26,13 @@ public class TaxAuthority {
     public List<TaxBracket> getTaxBrackets() {
         return taxBrackets;
     }
-    List<TaxBracket> rates;
 
     public int getId() {
         return id;
+    }
+
+    @Override
+    public String toString() {
+        return "TaxAuthority{" + label + "}";
     }
 }

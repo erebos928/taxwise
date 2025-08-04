@@ -19,6 +19,12 @@
       </assistant-state>
     </assistants>
   </component>
+  <component name="DBNavigator.Project.DatabaseBrowserManager">
+    <autoscroll-to-editor value="false" />
+    <autoscroll-from-editor value="true" />
+    <show-object-properties value="true" />
+    <loaded-nodes />
+  </component>
   <component name="DBNavigator.Project.DatabaseConsoleManager">
     <connection id="1b6a7f0a-a7ad-4c7e-9f50-23b3fb240557">
       <console name="taxwise" type="STANDARD" schema="behrooz_taxwise" session="Main" />
@@ -32,6 +38,9 @@
   </component>
   <component name="DBNavigator.Project.DatabaseSessionManager">
     <connection id="1b6a7f0a-a7ad-4c7e-9f50-23b3fb240557" />
+  </component>
+  <component name="DBNavigator.Project.DatasetFilterManager">
+    <filter-actions connection-id="1b6a7f0a-a7ad-4c7e-9f50-23b3fb240557" dataset="behrooz_taxwise.TaxBracket" active-filter-id="" />
   </component>
   <component name="DBNavigator.Project.ExecutionManager">
     <retain-sticky-names value="false" />

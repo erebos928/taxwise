@@ -5,6 +5,8 @@ import com.taxwise.data_access.*;
 import com.taxwise.model.TaxAuthority;
 import com.taxwise.model.TaxPayer;
 import com.taxwise.model.TaxReport;
+
+import java.util.List;
 import java.util.Scanner;
 
 //Interface utilisateur console permettant de saisir les données et d'afficher le rapport.
@@ -14,9 +16,9 @@ public class TaxwiseUI {
     ITaxAuthorityDao authorityDao;
     ITaxReportDAO reportDAO;
     ITaxPayerDAO payerDAO;
-
+    Scanner scanner = new Scanner(System.in);
     public void run() {
-        Scanner scanner = new Scanner(System.in);
+
         String datasource = chooseDataSource(scanner);
         configureDAOs(datasource);
         TaxAuthority authority = determineAuthority(scanner);
@@ -31,6 +33,14 @@ public class TaxwiseUI {
         System.out.println("Declaration :");
         System.out.println(report);
         reportDAO.save(report);
+        displayReports(reportDAO);
+    }
+
+    private void displayReports(ITaxReportDAO reportDAO) {
+        List<TaxReport> reports = reportDAO.findAll();
+        System.out.println("----------------------------");
+        System.out.println("List of reports so far:");
+        reports.forEach(System.out::println);
     }
 
     private static int getYear(Scanner scanner) {
@@ -74,6 +84,9 @@ public class TaxwiseUI {
             payer = payerDAO.findBySIN(sin);
             if (payer == null)
                 System.out.println("No such a payer found in the system.");
+            else {
+                System.out.printf("Payer found <name: %s , sin: %s>%n", payer.getName(),payer.getSin());
+            }
         }while(payer == null);
         return payer;
 

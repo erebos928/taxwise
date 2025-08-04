@@ -29,3 +29,5 @@ INSERT INTO TaxPayer (name, sin) VALUES
 -- TaxReport
 INSERT INTO TaxReport (payer_id, authority_id, year, income, tax) VALUES
 (1, 1, 2020, 7800.00,0.00);
+SELECT * FROM TaxReport JOIN TaxPayer on TaxReport.payer_id = TaxPayer.id JOIN TaxAuthority on TaxAuthority.id = TaxReport.authority_id;
+select * from `TaxReport`;

@@ -11,6 +11,12 @@ public class TaxReportDAO_MockDB implements ITaxReportDAO{
     public void save(TaxReport report) {
         MockDB.addReport(report);
     }
+
+    @Override
+    public List<TaxReport> findAll() {
+        return MockDB.getReports();
+    }
+
     public void delete(TaxReport report){
         TaxReport found = findReport(report);
         if (found != null)

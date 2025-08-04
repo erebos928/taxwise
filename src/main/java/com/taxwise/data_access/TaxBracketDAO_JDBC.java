@@ -50,7 +50,7 @@ public class TaxBracketDAO_JDBC implements ITaxBracketDAO{
 
     @Override
     public double getTaxFreeThreshold(String authority) {
-        final String query = getQuerySqlString();
+        final String query = getFreeThresholdQuerySqlString();
         try(Connection connection = DriverManager.getConnection(DbSpecs.url,
                 DbSpecs.user,
                 DbSpecs.password))
@@ -71,7 +71,7 @@ public class TaxBracketDAO_JDBC implements ITaxBracketDAO{
         }
     }
 
-    private static String getQuerySqlString() {
+    private static String getFreeThresholdQuerySqlString() {
         return "SELECT A.taxFreeThreshold FROM TaxAuthority A WHERE A.label = ?";
     }
 }

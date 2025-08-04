@@ -70,8 +70,9 @@ public class TaxCalculator {
     public TaxReport fileReport(int sin, double income, int year, String authority) {
 
         double tax = calculateTax(authority, income);
-        return new TaxReport(year, income, tax);
+        return new TaxReport(lastId++,year, income, tax);
     }
+    public static int lastId = 0;
 }
 
 

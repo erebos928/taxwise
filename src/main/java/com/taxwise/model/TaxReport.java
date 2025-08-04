@@ -8,12 +8,6 @@ public class TaxReport {
     private final double tax;   // Montant d'impôt calculé
     private TaxPayer payer;
     private TaxAuthority authority;
-    public TaxReport(int year, double income, double tax) {
-        id = -1;//used for im memory storage
-        this.year = year;
-        this.income = income;
-        this.tax = tax;
-    }
 
     public TaxReport(int id, int year, double income, double tax) {
         this.id = id;
@@ -22,8 +16,15 @@ public class TaxReport {
         this.tax = tax;
     }
 
+    @Override
     public String toString() {
-        return "Year: " + year + ", Income: " + income + ", Tax: " + String.format("%.2f",tax);
+        return "TaxReport{" +
+                "year=" + year +
+                ", income=" + income +
+                ", tax=" + tax +
+                ", payer=" + payer +
+                ", authority=" + authority +
+                '}';
     }
 
     public double getTax() { return tax; }
